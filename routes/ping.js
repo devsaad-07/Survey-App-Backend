@@ -1,18 +1,23 @@
 const express = require("express");
+const cors = require("cors");
 const db = require("../configs/firebaseconfig");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.options("/", cors());
+router.get("/", cors(), (req, res) => {
   res.send("Hi");
 });
-router.post("/sign-up", (req, res) => {
+
+router.options("/sign-up", cors());
+router.post("/sign-up", cors(), (req, res) => {
   const user = req.body;
   db.ref(`/Survey-App/Users`).push(user);
   res.send(user);
 });
 
-router.post("/create_survey", (req, res) => {
+router.options("/create_survey", cors());
+router.post("/create_survey", cors(), (req, res) => {
   const survey = req.body;
   db.ref(`/Survey-App/Surveys`).push({
     Questions: survey,
@@ -20,7 +25,8 @@ router.post("/create_survey", (req, res) => {
   res.send(survey);
 });
 
-router.get("/get_survey/:surveyID", (req, res) => {
+router.options("/get_survey/:surveyID", cors());
+router.get("/get_survey/:surveyID", cors(), (req, res) => {
   const survey = {};
   db.ref(`/Survey-App/Surveys/${req.params.surveyID}/Questions`).once(
     "value",
@@ -35,12 +41,12 @@ router.get("/get_survey/:surveyID", (req, res) => {
   );
 });
 
-router.post("/submit_survey/:surveyID/:userID", (req, res) => {
+router.options("/submit_survey/:surveyID/:userID", cors());
+router.post("/submit_survey/:surveyID/:userID", cors(), (req, res) => {
   const answers = req.body;
   db.ref(
     `/Survey-App/Surveys/${req.params.surveyID}/Answers/${req.params.userID}`
   ).set(answers);
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
   res.send("Answers Saved!");
 });
 
