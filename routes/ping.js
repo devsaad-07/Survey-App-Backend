@@ -4,13 +4,11 @@ const db = require("../configs/firebaseconfig");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
   res.send("Hi");
 });
 router.post("/sign-up", (req, res) => {
   const user = req.body;
   db.ref(`/Survey-App/Users`).push(user);
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
   res.send(user);
 });
 
@@ -19,7 +17,6 @@ router.post("/create_survey", (req, res) => {
   db.ref(`/Survey-App/Surveys`).push({
     Questions: survey,
   });
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
   res.send(survey);
 });
 
@@ -33,7 +30,6 @@ router.get("/get_survey/:surveyID", (req, res) => {
         // console.log(`${child.key}: ${child.val()}`);
         // console.log(survey);
       });
-      res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
       res.send(survey);
     }
   );
