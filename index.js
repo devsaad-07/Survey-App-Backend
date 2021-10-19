@@ -5,6 +5,11 @@ app.use(express.json());
 
 const pingRouter = require("./routes/ping");
 app.use("/", pingRouter);
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
