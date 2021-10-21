@@ -30,7 +30,7 @@ router.post("/send-email", cors(), (req, res) => {
           from: "saad.1@iitj.ac.in",
           to: userRecord.email,
           subject: "Please give this amazing survey!",
-          text: `Hi, Please give this survey, the link is http://127.0.0.1:8080/?action=submit&surveyid=${surveyid}`,
+          text: `Hi, Please give this survey, the link is https://survey-app-frontend.herokuapp.com/?action=submit&surveyid=${surveyid}`,
         };
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
