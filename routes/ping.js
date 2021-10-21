@@ -40,7 +40,7 @@ router.post("/send-email", cors(), (req, res) => {
           }
         });
       });
-      res.send("Email sent");
+      res.send(surveyid);
     })
     .catch((error) => {
       console.log("Error listing users:", error);
