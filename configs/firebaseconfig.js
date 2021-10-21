@@ -4,6 +4,5 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://surveyapp-72218-default-rtdb.firebaseio.com/",
 });
-const db = admin.database();
 
-module.exports = db;
+module.exports = admin;
